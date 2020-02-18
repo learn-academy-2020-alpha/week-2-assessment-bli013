@@ -1,7 +1,6 @@
 <!-- ASSESSMENT 2: React Debugging Challenge -->
 <!-- This React code is broken. Fix the code so the user can click through all the mood options and select their mood. -->
 <!-- In AWS: Click the "Preview" button to see a browser preveiw. Click the button with an arrow to open a new browser window. -->
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -16,8 +15,6 @@
     <script type="text/babel">
     // No need to change anything ABOVE this line ^
 
-
-
       class App extends React.Component{
         constructor(props){
           super(props)
@@ -29,8 +26,11 @@
         }
 
         nextMood = () => {
+          let {currentMood} = this.state
+          let {moods} = this.state
+
           if(currentMood === moods.length - 1){
-            this.setState({ currentMood: currentMood = 0 })
+            this.setState({ currentMood:0 })
           } else {
             this.setState({ currentMood: currentMood + 1 })
           }
@@ -42,19 +42,17 @@
 
         render(){
           return(
-            <div>
+          <div>
               <MoodMeter
                 moodOptions={ this.state.moods[this.state.currentMood] }
                 next={ this.nextMood }
                 setThisMood={ this.setThisMood }
-                set={ this.state.setMood }
-              />
-            </div>
+                set={ this.state.setMood } />
+          </div>
           )
         }
       }
-
-      class Header extends React.Component{
+    class Header extends React.Component{
         render(){
           return(
             <div>
@@ -63,29 +61,23 @@
           )
         }
       }
-
       class MoodMeter extends React.Component{
         render(){
           return(
+            <div>
               <h3>Mood Options:</h3>
               <p style={{fontSize: "40px"}}>{ this.props.moodOptions }</p>
-              <button onClick={ }>Click Here For Next Mood Option</button>
+              <button onClick={this.props.next }>Click Here For Next Mood Option</button>
               <br />
               <br />
               <h3>Save your mood here!</h3>
               <button onClick={ this.props.setThisMood }>Yup, this is me right now.</button>
               <h3>My mood:</h3>
               <p style={{fontSize: "40px"}}>{ this.props.set }</p>
+            </div>
           )
         }
       }
-
-
-
-
-
-
-
       // No need to change anything below this line
       const domContainer = document.querySelector('#react-container')
       ReactDOM.render(<App />, domContainer)
